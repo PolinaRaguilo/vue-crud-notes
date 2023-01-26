@@ -1,5 +1,7 @@
 # crud-notes
 
+## Simple apllication with CRUD operations using Vue3 Composition API, Bulma
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
