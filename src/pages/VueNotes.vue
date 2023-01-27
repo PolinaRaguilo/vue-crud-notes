@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <CustomNote v-for="note in notes" :note="note" key="note.id" />
+    <CustomNote v-for="note in notes" :note="note" key="note.id" @removeItem="removeHandler" />
 
 
   </div>
@@ -46,6 +46,11 @@ const addNoteHandler = () => {
   notes.value.unshift(newObject)
   newNote.value = ''
   newNoteRef.value.focus()
+}
+
+const removeHandler = (id) => {
+  const newNotes = notes.value.filter(item => item.id != id)
+  notes.value = newNotes
 }
 </script>
 

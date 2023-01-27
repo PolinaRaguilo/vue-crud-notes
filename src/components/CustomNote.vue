@@ -10,7 +10,7 @@
         </div>
         <footer class="card-footer">
             <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item">Delete</a>
+            <a href="#" class="card-footer-item" @click.prevent="removeNote">Delete</a>
         </footer>
     </div>
 </template>
@@ -28,4 +28,10 @@ const contentLength = computed(() => {
     const quantity = props.note.content.length
     return quantity === 1 ? `${quantity} character` : `${quantity} characters`
 })
+
+const emit = defineEmits(['removeItem'])
+
+const removeNote = () => {
+    emit('removeItem', props.note.id)
+}
 </script>
