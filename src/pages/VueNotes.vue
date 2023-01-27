@@ -14,44 +14,26 @@
       </div>
     </div>
 
-    <CustomNote v-for="note in notes" :note="note" key="note.id" @removeItem="removeHandler" />
-
+    <CustomNote v-for="note in noteStore.notes" :note="note" key="note.id" />
 
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import CustomNote from '../components/CustomNote.vue';
+import CustomNote from '@/components/CustomNote.vue';
+import { useNotesStore } from '@/stores/storeNotes'
 
 const newNote = ref('')
 const newNoteRef = ref(null)
-
-const notes = ref([
-  {
-    id: 1,
-    content: 'Platea mattis sit sit nisi interdum platea sit imperdiet faucibus. Et in ornare ultricies. Risus non dictumst. Ornare lectus et sed accumsan sit dictum odio. Cras quam, integer et leo, sapien orci, et. Morbi sodales dictumst. Odio. Nec luctus mauri.'
-  },
-  {
-    id: 2,
-    content: 'This is a short text'
-  }
-])
+const noteStore = useNotesStore()
 
 const addNoteHandler = () => {
-  const newObject = {
-    id: new Date().getTime().toString(),
-    content: newNote.value
-  }
-  notes.value.unshift(newObject)
+  noteStore.addNote(newNote.value)
   newNote.value = ''
   newNoteRef.value.focus()
 }
 
-const removeHandler = (id) => {
-  const newNotes = notes.value.filter(item => item.id != id)
-  notes.value = newNotes
-}
 </script>
 
 <style scoped>

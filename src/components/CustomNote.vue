@@ -10,13 +10,15 @@
         </div>
         <footer class="card-footer">
             <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item" @click.prevent="removeNote">Delete</a>
+            <a href="#" class="card-footer-item" @click.prevent="noteStore.deleteNote(note.id)">Delete</a>
         </footer>
     </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import { useNotesStore } from '../stores/storeNotes';
+
 
 const props = defineProps({
     note: {
@@ -24,14 +26,14 @@ const props = defineProps({
         required: true
     }
 })
+
+const noteStore = useNotesStore()
+
 const contentLength = computed(() => {
     const quantity = props.note.content.length
     return quantity === 1 ? `${quantity} character` : `${quantity} characters`
 })
 
-const emit = defineEmits(['removeItem'])
 
-const removeNote = () => {
-    emit('removeItem', props.note.id)
-}
+
 </script>
