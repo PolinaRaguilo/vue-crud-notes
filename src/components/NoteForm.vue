@@ -1,9 +1,10 @@
 <template>
-    <div class="card has-background-success-dark p-4 mb-5">
+    <div :class='`card has-background-${bgColor}-dark p-4 mb-5`'>
+        <label v-if="labelText" class='label has-text-white'>{{ labelText }}</label>
         <div class="field">
             <div class="control">
                 <textarea class="textarea" ref="textareaRef" :value="modelValue" @input="updateValue"
-                    placeholder="Add a new note"></textarea>
+                    :placeholder="placeholder"></textarea>
             </div>
         </div>
         <div class="field is-grouped is-grouped-right">
@@ -20,7 +21,18 @@ import { ref } from 'vue';
 const props = defineProps({
     modelValue: {
         type: String,
-        reauired: true
+        required: true
+    },
+    bgColor: {
+        type: String,
+        default: 'success'
+    },
+    placeholder: {
+        type: String,
+        default: 'Type something...'
+    },
+    labelText: {
+        type: String,
     }
 })
 

@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <NoteForm v-model="newNote" ref="editNoteRef">
+    <NoteForm v-model="newNote" ref="editNoteRef" placeholder="Add a new note">
       <template #buttons>
         <button class="button is-link has-background-success" @click="addNoteHandler" :disabled="!newNote">
           Add New Note</button>
