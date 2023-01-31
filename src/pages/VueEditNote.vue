@@ -18,21 +18,23 @@
 import NoteForm from '@/components/NoteForm.vue';
 import { ref } from 'vue';
 import { useNotesStore } from '@/stores/storeNotes';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
-const router = useRoute();
+const route = useRoute();
+const router = useRouter()
 
 const noteStore = useNotesStore();
 
 const noteContent = ref('');
 
-noteContent.value = noteStore.getNoteContent(router.params.id);
+noteContent.value = noteStore.getNoteContent(route.params.id);
 
 const handleSave = () => {
     const updatedInfo = {
-        id: router.params.id,
+        id: route.params.id,
         content: noteContent.value
     }
     noteStore.updateNote(updatedInfo)
+    router.push('/')
 }
 </script>
