@@ -17,8 +17,10 @@
 
             <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
                 <div class="navbar-end">
-                    <router-link class="navbar-item" to="/" active-class="is-active">Notes </router-link>
-                    <router-link class="navbar-item" to="/stats" active-class="is-active">Stats </router-link>
+                    <router-link @click="hideNavHandler" class="navbar-item" to="/" active-class="is-active">Notes
+                    </router-link>
+                    <router-link @click="hideNavHandler" class="navbar-item" to="/stats" active-class="is-active">Stats
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -28,7 +30,11 @@
 <script setup>
 import { ref } from 'vue';
 
-const showMobileNav = ref(false)
+let showMobileNav = ref(false)
+
+const hideNavHandler =() => {
+    showMobileNav = false
+}
 
 
 
