@@ -8,7 +8,7 @@
 
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                     data-target="navbarBasicExample" :class="{ 'is-active': showMobileNav }"
-                    @click.prevent="showMobileNav = !showMobileNav">
+                    @click.prevent="showMobileNav = !showMobileNav" ref="navbarMenuRef">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -29,13 +29,17 @@
 
 <script setup>
 import { ref } from 'vue';
+import { onClickOutside } from '@vueuse/core';
 
 let showMobileNav = ref(false)
+const navbarMenuRef = ref(null)
 
-const hideNavHandler =() => {
-    showMobileNav = false
+
+const hideNavHandler = () => {
+    showMobileNav.value = false
 }
 
+onClickOutside(navbarMenuRef, () => hideNavHandler())
 
 
 </script>
