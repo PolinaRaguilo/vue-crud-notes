@@ -45,7 +45,7 @@ onClickOutside(modalRef, () => closeHandler())
 
 
 const handleKeyboard = (e) => {
-    if(event.key === 'Escape'){
+    if(e.key === 'Escape'){
         closeHandler()
       }
 }
