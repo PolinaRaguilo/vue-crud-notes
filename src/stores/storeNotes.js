@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '@/js/firebase';
 
 export const useNotesStore = defineStore('storeNotes', {
@@ -25,12 +25,16 @@ export const useNotesStore = defineStore('storeNotes', {
       this.notes[index].content = content;
     },
     async getNotes() {
-      const querySnapshot = await getDocs(collection(db, 'notes'));
-      querySnapshot.forEach((doc) => {
-        this.notes.push({
-          id: doc.id,
-          content: doc.data().content,
+      onSnapshot(collection(db, 'notes'), (querySnapshot) => {
+        const newNotes = [];
+
+        querySnapshot.forEach((doc) => {
+          newNotes.push({
+            id: doc.id,
+            content: doc.data().content,
+          });
         });
+        this.notes = newNotes;
       });
     },
   },
