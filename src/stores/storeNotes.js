@@ -27,10 +27,10 @@ export const useNotesStore = defineStore('storeNotes', {
       });
     },
     async deleteNote(idDel) {
-      await deleteDoc(doc(db, 'notes', idDel.toString()));
+      await deleteDoc(doc(db, 'notes', idDel));
     },
     async updateNote({ id, content }) {
-      const noteRef = doc(db, 'notes', id.toString());
+      const noteRef = doc(db, 'notes', id);
 
       await updateDoc(noteRef, {
         content,

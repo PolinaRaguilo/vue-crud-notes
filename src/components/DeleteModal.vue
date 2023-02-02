@@ -27,7 +27,7 @@ const modalRef = ref(null)
 const emits = defineEmits(['closeModal'])
 const props = defineProps({
     id:{
-        type: Number,
+        type: String,
         required: true
     }
 })

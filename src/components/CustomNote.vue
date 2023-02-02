@@ -13,7 +13,7 @@
             <router-link :to='`/edit/${note.id}`' class="card-footer-item">Edit</router-link>
             <a class="card-footer-item" @click.prevent="modal.deleteNote = true">Delete</a>
         </footer>
-        <DeleteModal v-if="modal.deleteNote" @closeModal="closeModal" :id="+note.id"/>
+        <DeleteModal v-if="modal.deleteNote" @closeModal="closeModal" :id="note.id"/>
     </div>
 </template>
 

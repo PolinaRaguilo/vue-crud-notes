@@ -8,11 +8,12 @@
 
     </NoteForm>
 
-    <progress v-if="noteStore.notesLoading" class="progress is-small is-primary" max="100"/>
+    <progress v-if="noteStore.notesLoading" class="progress is-small is-primary" max="100" />
 
     <template v-else>
-          <CustomNote  v-for="note in noteStore.notes" :note="note" key="note.id" />
-
+      <CustomNote v-for="note in noteStore.notes" :note="note" key="note.id" />
+      <div v-if="!noteStore.notes.length"
+        class="is-size-4 has-text-centered has-text-grey-light is-family-monospace py-6"> No notes here yet...</div>
     </template>
 
   </div>
