@@ -3,8 +3,9 @@
         <div class="card-content">
             <div class="content">
                 {{ note.content }}
-                <div class="has-text-right has-text-grey-light mt-2">
-                    <small>{{ contentLength }}</small>
+                <div class="columns is-mobile has-text-grey-light mt-2">
+                    <small class="column">{{ contentLength }}</small>
+                    <small class="column has-text-right">{{ dateFormatted }}</small>
                 </div>
             </div>
         </div>
@@ -17,14 +18,21 @@
 </template>
 
 <script setup>
+import { useDateFormat } from '@vueuse/shared';
 import { computed, reactive } from 'vue';
 import DeleteModal from './DeleteModal.vue';
+
 
 const props = defineProps({
     note: {
         type: Object,
         required: true
     }
+})
+
+const dateFormatted = computed(() => {
+    const propsDate = new Date(parseInt(props.note.date))
+   return useDateFormat(propsDate, 'MM-DD-YYYY HH:mm:ss').value
 })
 
 const contentLength = computed(() => {

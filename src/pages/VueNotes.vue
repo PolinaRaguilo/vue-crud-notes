@@ -8,7 +8,12 @@
 
     </NoteForm>
 
-    <CustomNote v-for="note in noteStore.notes" :note="note" key="note.id" />
+    <progress v-if="noteStore.notesLoading" class="progress is-small is-primary" max="100"/>
+
+    <template v-else>
+          <CustomNote  v-for="note in noteStore.notes" :note="note" key="note.id" />
+
+    </template>
 
   </div>
 </template>
