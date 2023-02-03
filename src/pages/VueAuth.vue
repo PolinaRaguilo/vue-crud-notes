@@ -13,22 +13,14 @@
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
-                            <input 
-                                @focus="focusHandler"
-                                v-model="credentials.email" 
-                                class="input" 
-                                type="email"
+                            <input @focus="focusHandler" v-model="credentials.email" class="input" type="email"
                                 placeholder="e.g. alexsmith@gmail.com">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Password</label>
                         <div class="control">
-                            <input 
-                                @focus="focusHandler"
-                                v-model="credentials.password" 
-                                class="input" 
-                                type="password"
+                            <input @focus="focusHandler" v-model="credentials.password" class="input" type="password"
                                 placeholder="Enter a password">
                         </div>
                     </div>
@@ -48,10 +40,11 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
+import { useAuthStore } from '@/stores/storeAuth'
 
-
-const register = ref(false)
-const formError = ref('')
+const authStore = useAuthStore();
+const register = ref(false);
+const formError = ref('');
 
 const formTitle = computed(() => {
    return register.value ? 'Register' : 'Login'
@@ -66,9 +59,9 @@ const onSubmitHandler = () => {
         return;
     } else {
         if(register.value){
-            console.log('Register', credentials)
+            authStore.registerUser(credentials)
         } else {
-            console.log('login', credentials)
+            authStore.loginUser(credentials)
         }
     }
 }
