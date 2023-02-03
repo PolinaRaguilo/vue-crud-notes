@@ -15,7 +15,10 @@
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active': showMobileNav }">
+            <div id="navbarBasicExample" class="navbar-menu  is-align-items-center" :class="{ 'is-active': showMobileNav }">
+                <button class="button is-small is-primary is-light ml-3">
+                    Log out
+                </button>
                 <div class="navbar-end">
                     <router-link @click="hideNavHandler" class="navbar-item" to="/" active-class="is-active">Notes
                     </router-link>
