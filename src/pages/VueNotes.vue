@@ -24,7 +24,7 @@ import { ref } from 'vue';
 import CustomNote from '@/components/CustomNote.vue';
 import { useNotesStore } from '@/stores/storeNotes'
 import NoteForm from '@/components/NoteForm.vue';
-import {useWatchCharachters} from '@/use/useWatchCharacters'
+import { useWatchCharachters } from '@/use/useWatchCharacters'
 
 const newNote = ref('')
 const editNoteRef = ref(null)
@@ -36,6 +36,8 @@ const addNoteHandler = () => {
   newNote.value = ''
   editNoteRef.value.focusTextarea()
 }
+
+
 
 useWatchCharachters(newNote)
 

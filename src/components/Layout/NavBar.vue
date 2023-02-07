@@ -15,10 +15,16 @@
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu  is-align-items-center" :class="{ 'is-active': showMobileNav }">
-                <button class="button is-small is-primary is-light ml-3" @click="authStore.signOutUser()">
-                    Log out
+            <div id="navbarBasicExample" class="navbar-menu  is-align-items-center"
+                :class="{ 'is-active': showMobileNav }">
+                <button v-if="authStore.user.id" class="button is-small is-primary is-light ml-3"
+                    @click="logoutHandler">
+                    Log out {{ authStore.user.email }}
                 </button>
+                <router-link v-else to="/auth" class="button is-small is-primary is-light ml-3">
+                    Auth
+                </router-link>
+
                 <div class="navbar-end">
                     <router-link @click="hideNavHandler" class="navbar-item" to="/" active-class="is-active">Notes
                     </router-link>
@@ -33,7 +39,8 @@
 <script setup>
 import { ref } from 'vue';
 import { onClickOutside } from '@vueuse/core';
-import {useAuthStore} from '../../stores/storeAuth'
+import { useAuthStore } from '../../stores/storeAuth'
+
 
 const authStore = useAuthStore()
 let showMobileNav = ref(false)
@@ -41,6 +48,11 @@ const navbarMenuRef = ref(null)
 
 
 const hideNavHandler = () => {
+    showMobileNav.value = false
+}
+
+const logoutHandler = () => {
+    authStore.signOutUser()
     showMobileNav.value = false
 }
 
