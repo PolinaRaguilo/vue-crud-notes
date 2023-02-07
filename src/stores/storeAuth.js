@@ -28,11 +28,11 @@ export const useAuthStore = defineStore('storeAuth', {
         } else {
           this.user = {};
           this.router.replace('/auth');
+          noteStore.clearNotes();
         }
       });
     },
     registerUser({ email, password }) {
-      console.log(email.password);
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;

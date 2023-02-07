@@ -61,6 +61,9 @@ export const useNotesStore = defineStore('storeNotes', {
         this.notesLoading = false;
       });
     },
+    clearNotes() {
+      this.notes = [];
+    },
   },
   getters: {
     getNoteContent: (state) => {
