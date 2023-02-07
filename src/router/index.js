@@ -3,6 +3,7 @@ import VueNotes from '@/pages/VueNotes.vue';
 import VueStats from '@/pages/VueStats.vue';
 import VueEditNote from '@/pages/VueEditNote.vue';
 import VueAuth from '@/pages/VueAuth.vue';
+import { useAuthStore } from './../stores/storeAuth';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,6 +29,16 @@ const router = createRouter({
       component: VueAuth,
     },
   ],
+});
+
+router.beforeEach(async (to, from) => {
+  const authStore = useAuthStore();
+  if (!authStore.user.id && to.name !== 'auth') {
+    return { name: 'auth' };
+  }
+  if (authStore.user.id && to.name === 'auth') {
+    return false;
+  }
 });
 
 export default router;

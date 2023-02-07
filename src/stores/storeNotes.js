@@ -13,6 +13,7 @@ import { db } from '@/js/firebase';
 import { useAuthStore } from './storeAuth';
 
 let noteCollectionRef;
+let getItems;
 
 export const useNotesStore = defineStore('storeNotes', {
   state: () => {
@@ -47,8 +48,9 @@ export const useNotesStore = defineStore('storeNotes', {
     },
     async getNotes() {
       this.notesLoading = true;
+
       const notesQuery = query(noteCollectionRef, orderBy('dateStamp', 'desc'));
-      onSnapshot(notesQuery, (querySnapshot) => {
+      getItems = onSnapshot(notesQuery, (querySnapshot) => {
         const newNotes = [];
         querySnapshot.forEach((doc) => {
           newNotes.push({
@@ -63,6 +65,9 @@ export const useNotesStore = defineStore('storeNotes', {
     },
     clearNotes() {
       this.notes = [];
+      if (getItems) {
+        getItems(); //unsubscribe from any active listener
+      }
     },
   },
   getters: {
